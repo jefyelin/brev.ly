@@ -1,5 +1,4 @@
 import { NotFoundLinkError } from "@/application/errors/not-found-link-error";
-import { deleteLinkService } from "@/application/services/delete-link.service";
 import {
 	getOriginalUrlInputSchema,
 	getOriginalUrlOutputSchema,

@@ -14,6 +14,7 @@ import { version } from "../../../package.json";
 import { createLinkRoute } from "./routes/create-link.route";
 import { deleteLinkRoute } from "./routes/delete-link.route";
 import { getOriginalUrlRoute } from "./routes/get-original-url.route";
+import { listAllLinksRoute } from "./routes/list-all-links.route";
 import { transformSwaggerSchema } from "./transform-swagger-schema";
 
 const envToLogger = {
@@ -69,6 +70,7 @@ server.register(scalarReference, {
 server.register(createLinkRoute);
 server.register(deleteLinkRoute);
 server.register(getOriginalUrlRoute);
+server.register(listAllLinksRoute);
 
 server.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {
 	server.log.info(chalk.green("Server started!\n"));
