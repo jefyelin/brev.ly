@@ -2,7 +2,7 @@ import { env } from "@/infrastructure/config/env";
 import { fastifyCors } from "@fastify/cors";
 import { fastifyMultipart } from "@fastify/multipart";
 import { fastifySwagger } from "@fastify/swagger";
-import { fastifySwaggerUi } from "@fastify/swagger-ui";
+import scalarReference from "@scalar/fastify-api-reference";
 import chalk from "chalk";
 import { fastify } from "fastify";
 import {
@@ -10,8 +10,10 @@ import {
 	serializerCompiler,
 	validatorCompiler,
 } from "fastify-type-provider-zod";
+import { version } from "../../../package.json";
 import { createLinkRoute } from "./routes/create-link.route";
 import { deleteLinkRoute } from "./routes/delete-link.route";
+import { getOriginalUrlRoute } from "./routes/get-original-url.route";
 import { transformSwaggerSchema } from "./transform-swagger-schema";
 
 const envToLogger = {
@@ -53,19 +55,20 @@ server.register(fastifyMultipart);
 server.register(fastifySwagger, {
 	openapi: {
 		info: {
-			title: "Upload Server",
-			version: "1.0.0",
+			title: "Brev.ly API",
+			version: version,
 		},
 	},
 	transform: transformSwaggerSchema,
 });
 
-server.register(fastifySwaggerUi, {
+server.register(scalarReference, {
 	routePrefix: "/docs",
 });
 
 server.register(createLinkRoute);
 server.register(deleteLinkRoute);
+server.register(getOriginalUrlRoute);
 
 server.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {
 	server.log.info(chalk.green("Server started!\n"));
