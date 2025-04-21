@@ -9,6 +9,7 @@
 		"build": "tsup-node",
 		"start": "node dist/server.js",
 		"test": "vitest",
+		"lint:fix": "biome check --write",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
@@ -43,12 +44,7 @@
 		"vitest": "^3.1.1"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"esbuild"
-		],
-		"ignoredBuiltDependencies": [
-			"@biomejs/biome"
-		]
+		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild"],
+		"ignoredBuiltDependencies": ["@biomejs/biome"]
 	}
 }
