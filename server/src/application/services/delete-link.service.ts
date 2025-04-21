@@ -7,7 +7,7 @@ import { InternalServerErrorError } from "../errors/internal-server-error";
 import { NotFoundLinkError } from "../errors/not-found-link-error";
 
 export const deleteLinkInputSchema = z.object({
-	id: z.string().describe("The ID of the link to delete"),
+	id: z.string().uuid().describe("The ID of the link to delete"),
 });
 
 type DeleteLinkInput = z.infer<typeof deleteLinkInputSchema>;

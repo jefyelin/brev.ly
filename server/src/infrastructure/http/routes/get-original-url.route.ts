@@ -10,12 +10,12 @@ import { z } from "zod";
 
 export const getOriginalUrlRoute: FastifyPluginAsyncZod = async (server) => {
 	server.get(
-		"/links",
+		"/links/:shortCode",
 		{
 			schema: {
 				summary: "Get original URL from short code",
 				tags: ["Links"],
-				querystring: getOriginalUrlInputSchema,
+				params: getOriginalUrlInputSchema,
 				response: {
 					200: getOriginalUrlOutputSchema,
 					400: z.object({ message: z.string() }),
@@ -25,7 +25,7 @@ export const getOriginalUrlRoute: FastifyPluginAsyncZod = async (server) => {
 		},
 		async (request, reply) => {
 			const result = await getOriginalUrlService({
-				shortCode: request.query.shortCode,
+				shortCode: request.params.shortCode,
 			});
 
 			if (result.isLeft()) {
