@@ -1,25 +1,25 @@
 import {
-	listAllLinksOutputSchema,
-	listAllLinksService,
-} from "@/application/services/list-all-links.service";
+	exportLinksCSVOutputSchema,
+	exportLinksCSVService,
+} from "@/application/services/export-links-csv.service";
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { z } from "zod";
 
-export const listAllLinksRoute: FastifyPluginAsyncZod = async (server) => {
+export const exportLinksCSVRoute: FastifyPluginAsyncZod = async (server) => {
 	server.get(
-		"/links",
+		"/links/export",
 		{
 			schema: {
-				summary: "List all links",
+				summary: "Export all links to CSV",
 				tags: ["Links"],
 				response: {
-					200: listAllLinksOutputSchema,
+					200: exportLinksCSVOutputSchema,
 					500: z.object({ message: z.string() }),
 				},
 			},
 		},
 		async (_, reply) => {
-			const result = await listAllLinksService();
+			const result = await exportLinksCSVService();
 
 			if (result.isLeft()) {
 				const error = result.value;

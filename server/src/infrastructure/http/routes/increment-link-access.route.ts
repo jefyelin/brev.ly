@@ -20,7 +20,7 @@ export const incrementLinkAccessRoute: FastifyPluginAsyncZod = async (
 					200: z
 						.object({ message: z.string() })
 						.describe("Link access count incremented successfully"),
-					400: z.object({ message: z.string() }),
+					404: z.object({ message: z.string() }),
 					500: z.object({ message: z.string() }),
 				},
 			},

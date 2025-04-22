@@ -17,7 +17,7 @@ export const getOriginalUrlRoute: FastifyPluginAsyncZod = async (server) => {
 				params: getOriginalUrlInputSchema,
 				response: {
 					200: getOriginalUrlOutputSchema,
-					400: z.object({ message: z.string() }),
+					404: z.object({ message: z.string() }),
 					500: z.object({ message: z.string() }),
 				},
 			},

@@ -13,6 +13,7 @@ import {
 import { version } from "../../../package.json";
 import { createLinkRoute } from "./routes/create-link.route";
 import { deleteLinkRoute } from "./routes/delete-link.route";
+import { exportLinksCSVRoute } from "./routes/export-link-csv.route";
 import { getOriginalUrlRoute } from "./routes/get-original-url.route";
 import { incrementLinkAccessRoute } from "./routes/increment-link-access.route";
 import { listAllLinksRoute } from "./routes/list-all-links.route";
@@ -73,6 +74,7 @@ server.register(deleteLinkRoute);
 server.register(getOriginalUrlRoute);
 server.register(listAllLinksRoute);
 server.register(incrementLinkAccessRoute);
+server.register(exportLinksCSVRoute);
 
 server.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {
 	server.log.info(chalk.green("Server started!\n"));
