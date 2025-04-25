@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const textVariants = cva("text-foreground", {
+const textVariants = cva("", {
 	variants: {
 		variant: {
 			xl: "text-[24px] leading-[32px] font-bold",
