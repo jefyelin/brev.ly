@@ -52,7 +52,7 @@
 	--color-gray-400: #74798b;
 	--color-gray-500: #4d505c;
 	--color-gray-600: #1f2025;
-	--color-danger: #1f2025;
+	--color-danger: #b12c4d;
 
 	--font-display: "Open Sans", "sans-serif";
 }
@@ -131,6 +131,6 @@
 		@apply border-border outline-ring/50;
 	}
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-gray-200 text-foreground antialiased font-display;
 	}
 }

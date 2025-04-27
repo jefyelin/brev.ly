@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Text } from "./text";
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive w-full",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-2 w-full",
 	{
 		variants: {
 			variant: {
@@ -34,7 +34,7 @@ function Button({
 
 	return (
 		<Text
-			variant={variant === "primary" ? "md" : "sm-semibold"}
+			variant={variant === "primary" ? "md-semibold" : "sm-semibold"}
 			className="inline-flex w-full"
 			as="div"
 		>

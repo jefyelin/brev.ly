@@ -1,18 +1,11 @@
-import { Icon } from "@iconify/react";
-import { Button } from "./components/ui/button";
+import { Route, Routes } from "react-router";
+import { HomePage } from "./pages/home/home-page";
 
 export function App() {
 	return (
-		<div className="flex flex-col gap-4">
-			<Button>Button</Button>
-			<Button disabled>Button</Button>
-			<Button variant="secondary">Button</Button>
-			<Button variant="secondary" disabled>
-				Button
-			</Button>
-			<Button variant="secondary">
-				<Icon icon="ph:acorn-light" />
-			</Button>
-		</div>
+		<Routes>
+			<Route index element={<HomePage />} />
+			<Route path=":shortCode" element={<h1>Shortcode Page</h1>} />
+		</Routes>
 	);
 }

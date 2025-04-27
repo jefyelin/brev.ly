@@ -4,19 +4,20 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const textVariants = cva("", {
+const textVariants = cva("font-display", {
 	variants: {
 		variant: {
 			xl: "text-[24px] leading-[32px] font-bold",
 			lg: "text-[18px] leading-[24px] font-bold",
-			md: "text-[14px] leading-[18px] font-semibold",
+			"md-regular": "text-[16px] leading-[24px] font-normal",
+			"md-semibold": "text-[14px] leading-[18px] font-semibold",
 			"sm-regular": "text-[12px] leading-[16px] font-normal",
 			"sm-semibold": "text-[12px] leading-[16px] font-semibold",
 			xs: "text-[10px] leading-[14px] font-normal uppercase",
 		},
 	},
 	defaultVariants: {
-		variant: "md",
+		variant: "md-regular",
 	},
 });
 
