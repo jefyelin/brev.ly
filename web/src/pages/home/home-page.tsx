@@ -17,15 +17,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
+import { useCreateShortLink } from "@/hooks/use-create-short-link";
+import { useDeleteShortLink } from "@/hooks/use-delete-short-link";
 import { useListAllLinks } from "@/hooks/use-list-all-links";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
+import { AxiosError } from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 const formSchema = z.object({
-	originalLink: z.string().url("URL inválida"),
+	originalUrl: z.string().url("URL inválida"),
 	shortCode: z
 		.string()
 		.min(3, "Deve ter pelo menos 3 caracteres")
@@ -38,32 +43,92 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export const HomePage = () => {
+	const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null);
+	const [deletingLinkId, setDeletingLinkId] = useState<string | null>(null);
+
 	const form = useForm<FormSchema>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			originalLink: "",
+			originalUrl: "",
 			shortCode: "",
 		},
 	});
 
 	const listAllLinks = useListAllLinks();
-
-	const onSubmit = async (data: FormSchema) => {
-		alert(JSON.stringify(data, null, 2));
-	};
+	const deleteShortLink = useDeleteShortLink();
+	const createShortLink = useCreateShortLink();
 
 	const location = window.location.origin.replace(/^https?:\/\//, "");
 
-	const handleCopyLink = (shortCode: string) => {
+	const onSubmit = async (data: FormSchema) => {
+		const { originalUrl, shortCode } = data;
+
+		createShortLink.mutate(
+			{
+				originalUrl,
+				shortCode,
+			},
+			{
+				onSuccess: () => {
+					toast.success("Link encurtado com sucesso");
+					form.reset();
+				},
+				onError: (error) => {
+					if (
+						error instanceof AxiosError &&
+						error.response?.data.message === "Short code already exists"
+					) {
+						const errorMessage = "Esse link encurtado já existe, tente outro";
+						toast.error(errorMessage);
+
+						form.setError("shortCode", {
+							type: "value",
+							message: errorMessage,
+						});
+						form.setFocus("shortCode");
+
+						return;
+					}
+
+					toast.error("Erro ao encurtar o link, tente novamente mais tarde");
+				},
+			},
+		);
+	};
+
+	const handleCopyLink = (shortCode: string, linkId: string) => {
 		const link = `${window.location.origin}/${shortCode}`;
 		navigator.clipboard.writeText(link);
+		setCopiedLinkId(linkId);
+		toast.info(`Link copiado: ${link}`);
+
+		setTimeout(() => {
+			setCopiedLinkId(null);
+		}, 2000);
+	};
+
+	const handleDeleteShortLink = (id: string) => {
+		setDeletingLinkId(id);
+		deleteShortLink.mutate(
+			{ id },
+			{
+				onSuccess: () => {
+					toast.success("Link deletado com sucesso");
+					setDeletingLinkId(null);
+				},
+				onError: () => {
+					toast.error("Erro ao deletar o link, tente novamente mais tarde");
+					setDeletingLinkId(null);
+				},
+			},
+		);
 	};
 
 	return (
 		<div className="px-3 py-8 flex flex-col items-center gap-[1.4819rem] lg:items-start lg:gap-8 lg:max-w-[61.25rem] lg:mx-auto lg:px-0 lg:pt-[5.5rem] min-h-dvh h-fit">
 			<img
 				src="./brev.ly-logo.svg"
-				alt=""
+				alt="Logo Brev.ly"
 				className="w-[6.0419rem] h-[1.5181rem]"
 			/>
 			<div className="flex flex-col gap-3 w-full lg:grid lg:grid-cols-10">
@@ -79,7 +144,7 @@ export const HomePage = () => {
 							>
 								<FormField
 									control={form.control}
-									name="originalLink"
+									name="originalUrl"
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel>link original</FormLabel>
@@ -200,12 +265,28 @@ export const HomePage = () => {
 														<div className="flex gap-1">
 															<Button
 																variant="secondary"
-																onClick={() => handleCopyLink(link.shortCode)}
+																onClick={() =>
+																	handleCopyLink(link.shortCode, link.id)
+																}
 															>
-																<Icon icon="ph:copy" />
+																<Icon
+																	icon={
+																		copiedLinkId === link.id
+																			? "ph:check"
+																			: "ph:copy"
+																	}
+																/>
 															</Button>
-															<Button variant="secondary">
-																<Icon icon="ph:trash" />
+															<Button
+																variant="secondary"
+																onClick={() => handleDeleteShortLink(link.id)}
+																disabled={deletingLinkId !== null}
+															>
+																{deletingLinkId === link.id ? (
+																	<Icon icon="svg-spinners:90-ring-with-bg" />
+																) : (
+																	<Icon icon="ph:trash" />
+																)}
 															</Button>
 														</div>
 													</div>

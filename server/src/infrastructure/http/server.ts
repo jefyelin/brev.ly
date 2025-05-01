@@ -52,7 +52,10 @@ server.setErrorHandler((error, _, reply) => {
 	return reply.status(500).send({ message: "Internal server error." });
 });
 
-server.register(fastifyCors, { origin: "*" });
+server.register(fastifyCors, {
+	origin: true,
+	methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
+});
 
 server.register(fastifyMultipart);
 server.register(fastifySwagger, {
