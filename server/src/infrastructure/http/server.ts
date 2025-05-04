@@ -80,8 +80,7 @@ server.register(incrementLinkAccessRoute);
 server.register(exportLinksCSVRoute);
 
 server.listen({ port: env.PORT, host: "0.0.0.0" }).then(() => {
-	server.log.info(chalk.green("Server started!\n"));
-
+	server.log.info(chalk.green("Server started!"));
 	server.log.info(chalk.blue(`Server: http://localhost:${env.PORT}`));
-	server.log.info(chalk.magenta(`Docs: http://localhost:${env.PORT}/docs\n`));
+	server.log.info(chalk.magenta(`Docs: http://localhost:${env.PORT}/docs`));
 });
