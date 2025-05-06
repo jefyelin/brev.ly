@@ -1,15 +1,17 @@
 import type { AxiosResponse } from "axios";
 import { serverInstance } from "./server-instance";
 
+export interface Link {
+	id: string;
+	originalUrl: string;
+	shortCode: string;
+	description: string;
+	accessCount: number;
+	createdAt: string;
+}
+
 export interface ListAllLinksResponse {
-	links: {
-		id: string;
-		originalUrl: string;
-		shortCode: string;
-		description: string;
-		accessCount: number;
-		createdAt: string;
-	}[];
+	links: Link[];
 }
 
 export async function listAllLinks(): Promise<ListAllLinksResponse> {

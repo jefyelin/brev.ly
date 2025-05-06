@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import type * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
@@ -14,6 +13,7 @@ import {
 
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { WarningIcon } from "./icon";
 import { Text } from "./text";
 
 const Form = FormProvider;
@@ -155,12 +155,7 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 				variant="sm-regular"
 				className="text-gray-500 flex items-center gap-2"
 			>
-				<Icon
-					icon="ph:warning"
-					className="text-danger"
-					width={16}
-					height={16}
-				/>
+				<WarningIcon className="text-danger" />
 				{body}
 			</Text>
 		</p>

@@ -15,6 +15,7 @@ export const getOriginalUrlInputSchema = z.object({
 });
 
 export const getOriginalUrlOutputSchema = z.object({
+	id: z.string(),
 	originalUrl: z.string().url(),
 });
 
@@ -27,7 +28,7 @@ export const getOriginalUrlService = async (
 ): Promise<Either<Error, GetOriginalUrlOutput>> => {
 	try {
 		const link = await db.query.links.findFirst({
-			columns: { originalUrl: true },
+			columns: { id: true, originalUrl: true },
 			where: eq(links.shortCode, input.shortCode),
 		});
 
@@ -36,6 +37,7 @@ export const getOriginalUrlService = async (
 		}
 
 		return right({
+			id: link.id,
 			originalUrl: link.originalUrl,
 		});
 	} catch {

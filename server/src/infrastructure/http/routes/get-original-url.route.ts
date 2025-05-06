@@ -37,9 +37,7 @@ export const getOriginalUrlRoute: FastifyPluginAsyncZod = async (server) => {
 			}
 
 			if (result.isRight()) {
-				return reply.status(200).send({
-					originalUrl: result.value.originalUrl,
-				});
+				return reply.status(200).send(result.value);
 			}
 		},
 	);
