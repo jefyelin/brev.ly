@@ -1,3 +1,5 @@
+![Thumbnail](https://github.com/user-attachments/assets/bea6f9a2-b8e0-4a4f-839e-e8dbf6b9a003)
+
 # Brev.ly
 
 Brev.ly is a modern URL shortener application, featuring a React + Vite web frontend and a Node.js backend with PostgreSQL and Cloudflare R2 integration. It allows users to create, manage, and track shortened links with a focus on usability, responsiveness, and a clean UI. This project is part of a postgraduate program at [Faculdade de Tecnologia Rocketseat](https://www.rocketseat.com.br/).
