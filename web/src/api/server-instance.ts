@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const serverInstance = axios.create({
-	baseURL: "http://localhost:3333/",
+	baseURL: import.meta.env.VITE_SERVER_CLIENT_URL,
 	headers: {
 		Accept: "application/json",
 		"Content-Type": "application/json",

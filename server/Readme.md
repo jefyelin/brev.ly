@@ -1,6 +1,16 @@
 # Brev.ly Server
 
-A URL shortener backend service with CSV export and CDN integration. This project is part of a postgraduate program at Faculdade de [Tecnologia Rocketseat](https://www.rocketseat.com.br/).
+A URL shortener backend service with CSV export and CDN integration. This project is part of a postgraduate program at [Faculdade de Tecnologia Rocketseat](https://www.rocketseat.com.br/).
+
+---
+
+## Features
+
+- Create, delete, and list shortened links
+- Get original URLs by short code
+- Track access counts
+- Export all links as CSV (stored on Cloudflare R2)
+- OpenAPI documentation
 
 ---
 
@@ -117,37 +127,8 @@ docker run -p 3333:3333 brev.ly
 
 ---
 
-## Features
-
-- Create, delete, and list shortened links
-- Get original URLs by short code
-- Track access counts
-- Export all links as CSV (stored on Cloudflare R2)
-- OpenAPI documentation
-
----
-
 ## Troubleshooting
 
 - Ensure PostgreSQL is running and accessible at `DATABASE_URL`
 - Cloudflare R2 credentials must be valid for CSV export
 - For any issues, check logs and ensure all environment variables are set
-
----
-
-## Rules (PT-BR)
-
-- [X]  Deve ser possível criar um link
-    - [X]  Não deve ser possível criar um link com URL encurtada mal formatada
-    - [X]  Não deve ser possível criar um link com URL encurtada já existente
-- [X]  Deve ser possível deletar um link
-- [X]  Deve ser possível obter a URL original por meio de uma URL encurtada
-- [X]  Deve ser possível listar todas as URL’s cadastradas
-- [X]  Deve ser possível incrementar a quantidade de acessos de um link
-- [X]  Deve ser possível exportar os links criados em um CSV
-    - [X]  Deve ser possível acessar o CSV por meio de uma CDN (Amazon S3, Cloudflare R2, etc)
-    - [X]  Deve ser gerado um nome aleatório e único para o arquivo
-    - [X]  Deve ser possível realizar a listagem de forma performática
-    - [X]  O CSV deve ter campos como, URL original, URL encurtada, contagem de acessos e data de criação.
-
----

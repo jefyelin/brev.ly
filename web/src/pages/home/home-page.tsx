@@ -52,6 +52,7 @@ export const HomePage = () => {
 							deletingLinkId={deletingLinkId}
 							isLoading={listAllLinks.isLoading}
 							isSuccess={listAllLinks.isSuccess}
+							isError={listAllLinks.isError}
 							links={listAllLinks.data?.links}
 							handleCopyLink={handleCopyLink}
 							handleDeleteShortLink={handleDeleteShortLink}

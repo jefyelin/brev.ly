@@ -16,6 +16,7 @@ interface ShortLinkListProps {
 	deletingLinkId: string | null;
 	isLoading: boolean;
 	isSuccess: boolean;
+	isError: boolean;
 	links?: Link[];
 	handleCopyLink: (shortCode: string, linkId: string) => void;
 	handleDeleteShortLink: (id: string) => void;
@@ -26,6 +27,7 @@ export const ShortLinkList = ({
 	deletingLinkId,
 	isLoading,
 	isSuccess,
+	isError,
 	links,
 	handleCopyLink,
 	handleDeleteShortLink,
@@ -50,7 +52,7 @@ export const ShortLinkList = ({
 								<>
 									<Separator />
 									<div className="flex flex-col gap-3 px-[1.0625rem] pt-4 pb-6 justify-center items-center">
-										<LinkIcon className="text-gray-400" />
+										<LinkIcon className="text-gray-400 w-8 h-8" />
 										<Text className="text-gray-500">
 											Ainda não existem links cadastrados
 										</Text>
@@ -124,6 +126,18 @@ export const ShortLinkList = ({
 							))}
 						</>
 					) : null}
+					{isError && (
+						<>
+							<Separator />
+							<div className="flex flex-col gap-3 px-[1.0625rem] pt-4 pb-6 justify-center items-center">
+								<LinkIcon className="text-gray-400 w-8 h-8" />
+								<Text className="text-gray-500">
+									Ocorreu um erro ao carregar os links, tente novamente mais
+									tarde.
+								</Text>
+							</div>
+						</>
+					)}
 				</>
 			)}
 		</>
