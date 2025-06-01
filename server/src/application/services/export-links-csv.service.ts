@@ -47,7 +47,7 @@ export const exportLinksCSVService = async (): Promise<
 		const upload = new Upload({
 			client: clientCloudflareR2,
 			params: {
-				Bucket: env.CLOUDFLARE_BUCKET_NAME,
+				Bucket: env.CLOUDFLARE_BUCKET,
 				Key: fileName,
 				Body: streamToUpload,
 				ContentType: "text/csv",
@@ -56,7 +56,7 @@ export const exportLinksCSVService = async (): Promise<
 
 		await Promise.all([pipeline(csvStream, streamToUpload), upload.done()]);
 
-		const fileUrl = `${env.CLOUDFLARE_BUCKET_PUBLIC_URL}/${fileName}`;
+		const fileUrl = `${env.CLOUDFLARE_PUBLIC_URL}/${fileName}`;
 
 		return right({
 			fileName,

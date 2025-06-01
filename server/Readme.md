@@ -55,7 +55,7 @@ cp .env.exemple .env
 - `PORT` - Server port (default: 3333)
 - `NODE_ENV` - Environment (`development`, `test`, `production`)
 - `DATABASE_URL` - PostgreSQL connection string (see [Database Setup](#database-setup))
-- `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_ACCESS_KEY_ID`, `CLOUDFLARE_SECRET_ACCESS_KEY`, `CLOUDFLARE_BUCKET_NAME`, `CLOUDFLARE_BUCKET_PUBLIC_URL` - Cloudflare R2 credentials for CSV export
+- `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_ACCESS_KEY_ID`, `CLOUDFLARE_SECRET_ACCESS_KEY`, `CLOUDFLARE_BUCKET`, `CLOUDFLARE_PUBLIC_URL` - Cloudflare R2 credentials for CSV export
 
 ---
 

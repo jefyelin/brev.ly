@@ -53,5 +53,5 @@ pnpm preview
 Copy `.env.exemple` to `.env` and adjust as needed:
 
 ```env
-VITE_SERVER_CLIENT_URL="http://localhost:3333"
+VITE_BACKEND_URL="http://localhost:3333"
 ```
